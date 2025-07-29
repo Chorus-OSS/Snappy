@@ -1,0 +1,16 @@
+[versions]
+kotlin = "2.2.0"
+kotlinx-io = "0.8.0"
+dokka = "2.0.0"
+maven-publish = "0.34.0"
+varlen = "1.0.0"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-io = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinx-io" }
+varlen = { module = "org.chorus-oss:varlen", version.ref = "varlen" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
