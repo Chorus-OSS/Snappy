@@ -1,9 +1,14 @@
 package org.chorus_oss.snappy
 
 import kotlinx.io.*
+import kotlinx.io.bytestring.ByteString
 import org.chorus_oss.varlen.types.readUIntVar
 
 class SnappyDecompressor {
+    fun decompress(data: ByteString): ByteString {
+        return ByteString(decompress(data.toByteArray()))
+    }
+
     fun decompress(data: ByteArray): ByteArray {
         val buf = Buffer()
         buf.write(data)

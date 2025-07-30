@@ -1,12 +1,17 @@
 package org.chorus_oss.snappy
 
 import kotlinx.io.Buffer
+import kotlinx.io.bytestring.ByteString
 import kotlinx.io.readByteArray
 import org.chorus_oss.varlen.types.writeUIntVar
 import kotlin.math.min
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class SnappyCompressor {
+    fun compress(data: ByteString): ByteString {
+        return ByteString(compress(data.toByteArray()))
+    }
+
     fun compress(data: ByteArray): ByteArray {
         val buf = Buffer()
         buf.writeUIntVar(data.size.toUInt())
