@@ -34,7 +34,7 @@ class SnappyDecompressor {
     }
 
     companion object {
-        fun readLiteralLen(tag: Int, buf: Buffer): Int {
+        private fun readLiteralLen(tag: Int, buf: Buffer): Int {
             val code = tag ushr 2
             return (
                 if (code < 60) code
@@ -48,7 +48,7 @@ class SnappyDecompressor {
             ) + 1
         }
 
-        fun readCopy(tag: Int, buf: Buffer): Pair<Int, Int> {
+        private fun readCopy(tag: Int, buf: Buffer): Pair<Int, Int> {
             return when (tag and 0x03) {
                 1 -> {
                     val len = ((tag ushr 2) and 0x7) + 4
