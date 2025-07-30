@@ -61,7 +61,7 @@ class SnappyCompressor {
         private const val HASH_SIZE: Int = 1 shl HASH_ORDER
 
         private fun hash(value: Int, shift: Int): Int {
-            return ((value * 0x1E35A7BD) ushr shift) and (HASH_SIZE - 1)
+            return ((value * 0x1E35A7BD) ushr shift) and ((1 shl shift) - 1)
         }
 
         private fun ByteArray.getInt(pos: Int): Int {
@@ -129,9 +129,7 @@ class SnappyCompressor {
             }
 
             if (length in 4..11 && offset < 2048) {
-                val lenMinus4 = length - 4
-                val tag = (1 or (lenMinus4 shl 2) or ((offset shr 8) shl 5))
-                buf.writeByte(tag.toByte())
+                buf.writeByte((1 or ((length - 4) shl 2) or ((offset shr 8) shl 5)).toByte())
                 buf.writeByte((offset and 0xFF).toByte())
             } else {
                 buf.writeByte(((2) or ((length - 1) shl 2)).toByte())
